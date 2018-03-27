@@ -97,7 +97,7 @@ namespace GeonBit.UI
         /// <summary>
         /// The currently active user interface instance.
         /// </summary>
-        public static UserInterface Active = null;
+        public static UserInterface Active;
 
         // input manager
         static internal InputHelper _input;
@@ -106,10 +106,10 @@ namespace GeonBit.UI
         static ContentManager _content;
 
         // the main render target we render everything on
-        RenderTarget2D _renderTarget = null;
+        RenderTarget2D _renderTarget;
 
         // are we currently in use-render-target mode
-        private bool _useRenderTarget = false;
+        private bool _useRenderTarget;
 
         /// <summary>
         /// If true, GeonBit.UI will not raise exceptions on sanity checks, validations, and errors which are not critical.
@@ -181,16 +181,16 @@ namespace GeonBit.UI
         public float CursorScale = 1f;
 
         /// <summary>Screen width.</summary>
-        public int ScreenWidth = 0;
+        public int ScreenWidth;
 
         /// <summary>Screen height.</summary>
-        public int ScreenHeight = 0;
+        public int ScreenHeight;
 
         /// <summary>Draw utils helper. Contain general drawing functionality and handle effects replacement.</summary>
-        public DrawUtils DrawUtils = null;
+        public DrawUtils DrawUtils;
 
         /// <summary>Current active entity, eg last entity user interacted with.</summary>
-        public Entity ActiveEntity = null;
+        public Entity ActiveEntity;
 
         /// <summary>The current target entity, eg what cursor points on. Can be null if cursor don't point on any entity.</summary>
         public Entity TargetEntity { get; private set; }
@@ -253,7 +253,7 @@ namespace GeonBit.UI
         public EventCallback OnFocusChange = null;
 
         // cursor texture.
-        Texture2D _cursorTexture = null;
+        Texture2D _cursorTexture;
         
         // cursor width.
         int _cursorWidth = 32;
@@ -262,7 +262,7 @@ namespace GeonBit.UI
         Point _cursorOffset = Point.Zero;
 
         // time until we show tooltip text.
-        private float _timeUntilTooltip = 0f;
+        private float _timeUntilTooltip;
 
         // the current tooltip entity.
         Entity _tooltipEntity;
@@ -346,7 +346,7 @@ namespace GeonBit.UI
             {
                 // get dest rect and calculate tooltip position based on size and mouse position
                 var destRect = tooltip.GetActualDestRect();
-                var position = UserInterface.Active.GetTransformedCursorPos(new Vector2(-destRect.Width / 2, -destRect.Height - 20));
+                var position = Active.GetTransformedCursorPos(new Vector2(-destRect.Width / 2, -destRect.Height - 20));
 
                 // make sure tooltip is not out of screen boundaries
                 var screenBounds = Active.Root.GetActualDestRect();

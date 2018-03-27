@@ -72,23 +72,23 @@ namespace GeonBit.UI
         Keys _currCharacterInputKey = Keys.Escape;
 
         // keyboard input cooldown for textual input
-        float _keyboardInputCooldown = 0f;
+        float _keyboardInputCooldown;
 
         // true when a new keyboard key is pressed
-        bool _newKeyIsPressed = false;
+        bool _newKeyIsPressed;
 
         // current capslock state
-        bool _capslock = false;
+        bool _capslock;
 
         /// <summary>
         /// Current mouse wheel value.
         /// </summary>
-        public int MouseWheel = 0;
+        public int MouseWheel;
 
         /// <summary>
         /// Mouse wheel change sign (eg 0, 1 or -1) since last frame.
         /// </summary>
-        public int MouseWheelChange = 0;
+        public int MouseWheelChange;
 
         /// <summary>
         /// Create the input helper.

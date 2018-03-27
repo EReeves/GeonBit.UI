@@ -56,7 +56,7 @@ namespace GeonBit.UI.Example
         Paragraph targetEntityShow;
 
         // current example shown
-        int currExample = 0;
+        int currExample;
 
         /// <summary>
         /// Create the game instance.
@@ -111,12 +111,12 @@ namespace GeonBit.UI.Example
 
             // add previous example button
             previousExampleButton = new Button("<- Back", ButtonSkin.Default, Anchor.TopLeft, new Vector2(300, topPanelHeight));
-            previousExampleButton.OnClick = (Entity btn) => { this.PreviousExample(); };
+            previousExampleButton.OnClick = (Entity btn) => { PreviousExample(); };
             topPanel.AddChild(previousExampleButton);
 
             // add next example button
             nextExampleButton = new Button("Next ->", ButtonSkin.Default, Anchor.TopRight, new Vector2(300, topPanelHeight));
-            nextExampleButton.OnClick = (Entity btn) => { this.NextExample(); };
+            nextExampleButton.OnClick = (Entity btn) => { NextExample(); };
             topPanel.AddChild(nextExampleButton);
 
             // add show-get button
@@ -820,7 +820,7 @@ Maybe something interesting in tab3?"));
                     // button to create simple message box
                     {
                         var btn = new Button("Show Simple Message", ButtonSkin.Default);
-                        btn.OnClick += (Entities.Entity entity) =>
+                        btn.OnClick += (Entity entity) =>
                         {
                             Utils.MessageBox.ShowMsgBox("Hello World!", "This is a simple message box. It doesn't say much, really.");
                         };
@@ -831,7 +831,7 @@ Maybe something interesting in tab3?"));
                     panel.AddChild(new Paragraph("Or you can create custom message and buttons:"));
                     {
                         var btn = new Button("Show Custom Message", ButtonSkin.Default);
-                        btn.OnClick += (Entities.Entity entity) =>
+                        btn.OnClick += (Entity entity) =>
                         {
                             Utils.MessageBox.ShowMsgBox("Custom Message!", "In this message there are two custom buttons.\n\nYou can set different actions per button. For example, click on 'Surprise' and see what happens!", new Utils.MessageBox.MsgBoxOption[] {
                                 new Utils.MessageBox.MsgBoxOption("Close", () => { return true; }),
@@ -845,7 +845,7 @@ Maybe something interesting in tab3?"));
                     panel.AddChild(new Paragraph("And you can also add extra entities to the message box:"));
                     {
                         var btn = new Button("Message With Extras", ButtonSkin.Default);
-                        btn.OnClick += (Entities.Entity entity) =>
+                        btn.OnClick += (Entity entity) =>
                         {
                             var textInput = new TextInput(false);
                             textInput.PlaceholderText = "Enter your name";

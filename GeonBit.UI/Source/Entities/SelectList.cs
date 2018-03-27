@@ -10,7 +10,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using GeonBit.UI.DataTypes;
 
 namespace GeonBit.UI.Entities
 {
@@ -32,7 +31,7 @@ namespace GeonBit.UI.Entities
     public class SelectList : Panel
     {
         // current selected value and index
-        string _value = null;
+        string _value;
         int _index = -1;
 
         // store list last known internal size, so we'll know if size changed and we need to re-create the list
@@ -45,7 +44,7 @@ namespace GeonBit.UI.Entities
         VerticalScrollbar _scrollbar;
 
         // indicate that we had a resize event while not being visible
-        bool _hadResizeWhileNotVisible = false;
+        bool _hadResizeWhileNotVisible;
 
         /// <summary>Extra space (in pixels) between items on Y axis.</summary>
         public int ExtraSpaceBetweenLines = 0;
@@ -54,7 +53,7 @@ namespace GeonBit.UI.Entities
         public float ItemsScale = 1f;
 
         /// <summary>Special callback to execute when list size changes.</summary>
-        public EventCallback OnListChange = null;
+        public EventCallback OnListChange;
 
         /// <summary>
         /// If true and an item in the list is too long for its width, the list will cut its value to fit width.
@@ -318,17 +317,17 @@ namespace GeonBit.UI.Entities
                 // create and add new paragraph
                 Paragraph paragraph = UserInterface.DefaultParagraph(".", Anchor.Auto);
                 paragraph.PromiscuousClicksMode = true;
-                paragraph.WrapWords = false;
+                paragraph.WrapWords = true;
                 paragraph.UpdateStyle(DefaultParagraphStyle);
-                paragraph.Scale = paragraph.Scale * ItemsScale;
+                paragraph.Scale = 1;
                 paragraph.SpaceAfter = paragraph.SpaceAfter + new Vector2(0, ExtraSpaceBetweenLines - 2);
-                paragraph.ExtraMargin.Y = ExtraSpaceBetweenLines / 2 + 3;
+                paragraph.ExtraMargin.Y = ExtraSpaceBetweenLines / 2;
                 paragraph.AttachedData = new ParagraphData(this, i++);
                 paragraph.UseActualSizeForCollision = false;
                 paragraph.Size = new Vector2(0, paragraph.GetCharacterActualSize().Y + ExtraSpaceBetweenLines);
                 paragraph.BackgroundColorPadding = new Point((int)Padding.X, 5);
                 paragraph.BackgroundColorUseBoxSize = true;
-                paragraph._hiddenInternalEntity = true;
+                paragraph._hiddenInternalEntity = false;
                 paragraph.PropagateEventsTo(this);
                 AddChild(paragraph);
 
@@ -371,6 +370,7 @@ namespace GeonBit.UI.Entities
                 if (_scrollbar.Max < 2) { _scrollbar.Max = 2; }
                 _scrollbar.StepsCount = _scrollbar.Max;
                 _scrollbar.Visible = true;
+                _scrollbar.Scale = 1;
             } 
             // if no scrollbar is needed, hide it
             else

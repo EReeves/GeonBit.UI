@@ -40,13 +40,13 @@ namespace GeonBit.UI.Entities
         protected uint _max;
 
         /// <summary>How many steps (ticks) are in range.</summary>
-        protected uint _stepsCount = 0;
+        protected uint _stepsCount;
 
         /// <summary>Current value.</summary>
         protected int _value;
 
         /// <summary>Actual frame width in pixels (used internally).</summary>
-        protected float _frameActualWidth = 0f;
+        protected float _frameActualWidth;
 
         /// <summary>Default styling for the slider itself. Note: loaded from UI theme xml file.</summary>
         new public static StyleSheet DefaultStyle = new StyleSheet();

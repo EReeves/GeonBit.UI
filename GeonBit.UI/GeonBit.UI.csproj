@@ -7,7 +7,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DD284F36-FCD5-4265-AE4C-28B9A38B9DEF}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GeonBit.UI</RootNamespace>
     <AssemblyName>GeonBit.UI</AssemblyName>
@@ -18,7 +18,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;LINUX</DefineConstants>
+    <DefineConstants>DEBUso I've basically done nothG;TRACE;LINUX</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -83,8 +83,8 @@
     <Compile Include="Source\Utils\SimpleFileMenu.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
+    <Reference Include="MonoGame.Framework, Version=3.7.0.1447, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\MonoGame.Framework.Portable.3.7.0.1447-develop\lib\portable-net45+win8+wpa81\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -140,6 +140,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.manifest" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Libs\DataTypes\DataTypes.csproj">

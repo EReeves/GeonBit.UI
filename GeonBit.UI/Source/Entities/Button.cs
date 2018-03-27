@@ -14,7 +14,7 @@
 // Since: 2016.
 //-----------------------------------------------------------------------------
 #endregion
-using System.Collections.Generic;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GeonBit.UI.DataTypes;
@@ -50,7 +50,7 @@ namespace GeonBit.UI.Entities
         public bool ToggleMode = false;
 
         // button value when in toggle mode
-        private bool _checked = false;
+        private bool _checked;
 
         /// <summary>Default button size for when no size is provided or when -1 is set for either width or height.</summary>
         new public static Vector2 DefaultSize = new Vector2(0f, 70f);
@@ -62,7 +62,7 @@ namespace GeonBit.UI.Entities
         public static StyleSheet DefaultParagraphStyle = new StyleSheet();
 
         /// <summary>Optional custom skin that override's the default theme button textures.</summary>
-        private Texture2D[] _customSkin = null;
+        private Texture2D[] _customSkin;
         
         /// <summary>Frame width for when using custom skin.</summary>
         private Vector2 _customFrame = Vector2.Zero;

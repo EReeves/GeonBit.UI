@@ -14,7 +14,7 @@
 // Since: 2016.
 //-----------------------------------------------------------------------------
 #endregion
-using System.Collections.Generic;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GeonBit.UI.DataTypes;
@@ -133,7 +133,7 @@ namespace GeonBit.UI.Entities
     public class Icon : Image
     {
         /// <summary>If true, will draw inventory-like background to this icon.</summary>
-        public bool DrawBackground = false;
+        public bool DrawBackground;
 
         /// <summary>Default icon size for when no size is provided or when -1 is set for either width or height.</summary>
         new public static Vector2 DefaultSize = new Vector2(50f, 50f);

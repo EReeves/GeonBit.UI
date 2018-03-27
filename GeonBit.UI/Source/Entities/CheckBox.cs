@@ -10,10 +10,9 @@
 // Since: 2016.
 //-----------------------------------------------------------------------------
 #endregion
-using System.Collections.Generic;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GeonBit.UI.DataTypes;
 
 namespace GeonBit.UI.Entities
 {
@@ -28,7 +27,7 @@ namespace GeonBit.UI.Entities
         public Paragraph TextParagraph;
 
         /// <summary>Current checkbox value.</summary>
-        protected bool _value = false;
+        protected bool _value;
 
         // checkbox widget size (the graphic box part)
         static Vector2 CHECKBOX_SIZE = new Vector2(35, 35);

@@ -82,7 +82,7 @@ namespace GeonBit.UI.Entities
         }
 
         // text actual destination rect
-        Rectangle _actualDestRect = new Rectangle();
+        Rectangle _actualDestRect;
 
         /// <summary>If the outline width is less than this value, the outline will be optimized but will appear slightly less sharp on corners.</summary>
         protected static int MaxOutlineWidthToOptimize = 1;

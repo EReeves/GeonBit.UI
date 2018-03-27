@@ -18,13 +18,13 @@ namespace GeonBit.UI.Entities
     public class VerticalScrollbar : Slider
     {
         // frame and mark actual height
-        float _frameActualHeight = 0f;
+        float _frameActualHeight;
         int _markHeight = 20;
 
         /// <summary>
         /// If true, will adjust max value automatically based on entities in parent.
         /// </summary>
-        public bool AdjustMaxAutomatically = false;
+        public bool AdjustMaxAutomatically;
 
         /// <summary>Default scrollbar size for when no size is provided or when -1 is set for either width or height.</summary>
         new public static Vector2 DefaultSize = new Vector2(30f, 0f);

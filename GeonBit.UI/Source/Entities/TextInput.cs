@@ -6,9 +6,12 @@
 // Since: 2016.
 //-----------------------------------------------------------------------------
 #endregion
+
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using GeonBit.UI.Entities.TextValidators;
 
 namespace GeonBit.UI.Entities
@@ -21,6 +24,7 @@ namespace GeonBit.UI.Entities
     {
         // current text value
         string _value = string.Empty;
+        string visibleValue = string.Empty;
 
         // current caret position (-1 is last character).
         int _caret = -1;
@@ -32,7 +36,7 @@ namespace GeonBit.UI.Entities
         public Paragraph PlaceholderParagraph;
 
         /// <summary>If false, it will only allow one line input.</summary>
-        protected bool _multiLine = false;
+        protected bool _multiLine;
 
         // scrollbar to use if text height exceed the input box size
         VerticalScrollbar _scrollbar;
@@ -43,7 +47,7 @@ namespace GeonBit.UI.Entities
         public string ValueWhenEmpty = null;
 
         // current caret animation step
-        float _caretAnim = 0f;
+        float _caretAnim;
 
         /// <summary>Text to show when there's no input. Note that this text will be drawn with PlaceholderParagraph, and not TextParagraph.</summary>
         string _placeholderText = string.Empty;
@@ -52,7 +56,11 @@ namespace GeonBit.UI.Entities
         public int CharactersLimit = 0;
 
         /// <summary>If true, will limit max input length to fit textbox size.</summary>
-        public bool LimitBySize = false;
+        public bool LimitBySize;
+        
+        /// <summary>If true, will limit visible input to fit textbox size.</summary>
+        public bool LimitVisibleBySize;
+
 
         /// <summary>
         /// If provided, hide input and replace it with the given character.
@@ -177,7 +185,11 @@ namespace GeonBit.UI.Entities
         public string Value
         {
             get { return _value; }
-            set { _value = _multiLine ? value : value.Replace("\n", string.Empty); FixCaretPosition(); }
+            set
+            {
+                _value = _multiLine ? value : value.Replace("\n", string.Empty); FixCaretPosition();
+                visibleValue = value;
+            }
         }
 
         /// <summary>
@@ -263,9 +275,15 @@ namespace GeonBit.UI.Entities
                 TextParagraph.Text = hiddenVal.Insert(_caret >= 0 ? _caret : hiddenVal.Length, caretShow);
             }
             // set main text for regular text input
-            else
+            else if(!LimitVisibleBySize)
             {
                 TextParagraph.Text = _value.Insert(_caret >= 0 ? _caret : _value.Length, caretShow);
+            }
+            else if (LimitVisibleBySize)
+            {
+                var caretTemp = _caret;
+                if (_caret > visibleValue.Length) caretTemp = visibleValue.Length;
+                TextParagraph.Text = visibleValue.Insert(caretTemp >= 0 ? caretTemp : visibleValue.Length, caretShow);
             }
 
             // update placeholder text
@@ -418,7 +436,7 @@ namespace GeonBit.UI.Entities
             }
 
             // if set to limit by size make sure we don't exceed it
-            if (LimitBySize)
+            if (LimitBySize && !LimitVisibleBySize)
             {
                 // prepare display
                 PrepareInputTextForDisplay(false, false);
@@ -438,6 +456,28 @@ namespace GeonBit.UI.Entities
                     newVal = oldVal;
                     return false;
                 }
+            }
+
+            if (LimitVisibleBySize)
+            {
+                visibleValue = _value;
+                Debug.Assert(!_multiLine, "Multiline not compatable with LimitVisibleBySize");
+                // prepare display
+                PrepareInputTextForDisplay(false, false);
+
+                // get main paragraph actual size
+                Rectangle textSize = TextParagraph.GetActualDestRect();
+                if (newVal.Length <= 1) return true;
+                visibleValue = newVal;
+                
+                while (textSize.Width >= _destRectInternal.Width)
+                {                                       
+                    visibleValue = visibleValue.Substring(1);
+                    PrepareInputTextForDisplay(false, false);
+                    textSize = TextParagraph.GetActualDestRect();
+                }
+
+                return true;
             }
 
             // if got here we iterate over additional validators

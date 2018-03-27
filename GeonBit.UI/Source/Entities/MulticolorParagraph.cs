@@ -10,8 +10,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GeonBit.UI.DataTypes;
-using System.Text;
 
 namespace GeonBit.UI.Entities
 {
@@ -19,7 +17,7 @@ namespace GeonBit.UI.Entities
     public class ColorInstruction
     {
         // should we use the paragraph original color?
-        private bool _useFillColor = false;
+        private bool _useFillColor;
 
         // color for this instruction
         private Color _color = Color.White;

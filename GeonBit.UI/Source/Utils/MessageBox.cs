@@ -45,7 +45,7 @@ namespace GeonBit.UI.Utils
         public static int OpenedMsgBoxesCount
         {
             get; private set;
-        } = 0;
+        }
 
         /// <summary>
         /// Get if there's a message box currently opened.

@@ -11,7 +11,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GeonBit.UI.DataTypes;
 
 namespace GeonBit.UI.Entities
 {
@@ -67,7 +66,7 @@ namespace GeonBit.UI.Entities
         private Panel _internalRoot;
 
         /// <summary>Currently active tab.</summary>
-        TabData _activeTab = null;
+        TabData _activeTab;
 
         /// <summary>
         /// Optional panel skin to set as tabs background.

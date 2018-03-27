@@ -135,13 +135,13 @@ namespace GeonBit.UI.Entities
         public static readonly Vector2 USE_DEFAULT_SIZE = new Vector2(-1, -1);
 
         /// <summary>The direct parent of this entity.</summary>
-        protected Entity _parent = null;
+        protected Entity _parent;
 
         /// <summary>Index inside parent.</summary>
         protected int _indexInParent;
 
         /// <summary>Is the entity currently interactable.</summary>
-        protected bool _isInteractable = false;
+        protected bool _isInteractable;
 
         /// <summary>Optional identifier you can attach to entities so you can later search and retrieve by.</summary>
         public string Identifier = string.Empty;
@@ -176,11 +176,11 @@ namespace GeonBit.UI.Entities
         /// This is useful for stuff like a paragraph that's attached to a button etc.
         /// NOTE!!! entities that inherit parent state will not trigger any events either.
         /// </summary>
-        protected bool InheritParentState = false;
+        protected bool InheritParentState;
 
         // optional background object for this entity.
         // the background will be rendered on the full size of this entity, behind it, and will not respond to events etc.
-        private Entity _background = null;
+        private Entity _background;
 
         // mark the first update call on this entity.
         private bool _isFirstUpdate = true;
@@ -202,13 +202,13 @@ namespace GeonBit.UI.Entities
         /// Every time we update destination rect and internal destination rect view the update function, we increase this counter.
         /// This is so our children will know we did an update and they need to update too.
         /// </summary>
-        internal uint _destRectVersion = 0;
+        internal uint _destRectVersion;
 
         /// <summary>
         /// The last known version we have of the parent dest rect version.
         /// If this number does not match our parent's _destRectVersion, we will recalculate destination rect.
         /// </summary>
-        private uint _parentLastDestRectVersion = 0;
+        private uint _parentLastDestRectVersion;
 
         /// <summary>Optional data you can attach to this entity and retrieve later (for example when handling events).</summary>
         public object AttachedData = null;
@@ -233,52 +233,52 @@ namespace GeonBit.UI.Entities
         public static StyleSheet DefaultStyle = new StyleSheet();
 
         /// <summary>Callback to execute when mouse button is pressed over this entity (called once when button is pressed).</summary>
-        public EventCallback OnMouseDown = null;
+        public EventCallback OnMouseDown;
 
         /// <summary>Callback to execute when mouse button is released over this entity (called once when button is released).</summary>
-        public EventCallback OnMouseReleased = null;
+        public EventCallback OnMouseReleased;
 
         /// <summary>Callback to execute every frame while mouse button is pressed over the entity.</summary>
-        public EventCallback WhileMouseDown = null;
+        public EventCallback WhileMouseDown;
 
         /// <summary>Callback to execute every frame while mouse is hovering over the entity.</summary>
-        public EventCallback WhileMouseHover = null;
+        public EventCallback WhileMouseHover;
 
         /// <summary>Callback to execute when user clicks on this entity (eg release mouse over it).</summary>
-        public EventCallback OnClick = null;
+        public EventCallback OnClick;
 
         /// <summary>Callback to execute when entity value changes (relevant only for entities with value).</summary>
-        public EventCallback OnValueChange = null;
+        public EventCallback OnValueChange;
 
         /// <summary>Callback to execute when mouse start hovering over this entity (eg enters its region).</summary>
-        public EventCallback OnMouseEnter = null;
+        public EventCallback OnMouseEnter;
 
         /// <summary>Callback to execute when mouse stop hovering over this entity (eg leaves its region).</summary>
-        public EventCallback OnMouseLeave = null;
+        public EventCallback OnMouseLeave;
 
         /// <summary>Callback to execute when mouse wheel scrolls and this entity is the active entity.</summary>
-        public EventCallback OnMouseWheelScroll = null;
+        public EventCallback OnMouseWheelScroll;
 
         /// <summary>Called when entity starts getting dragged (only if draggable).</summary>
-        public EventCallback OnStartDrag = null;
+        public EventCallback OnStartDrag;
 
         /// <summary>Called when entity stop getting dragged (only if draggable).</summary>
-        public EventCallback OnStopDrag = null;
+        public EventCallback OnStopDrag;
 
         /// <summary>Called every frame while the entity is being dragged.</summary>
-        public EventCallback WhileDragging = null;
+        public EventCallback WhileDragging;
 
         /// <summary>Callback to execute every frame before this entity is rendered.</summary>
-        public EventCallback BeforeDraw = null;
+        public EventCallback BeforeDraw;
 
         /// <summary>Callback to execute every frame after this entity is rendered.</summary>
-        public EventCallback AfterDraw = null;
+        public EventCallback AfterDraw;
 
         /// <summary>Callback to execute every frame before this entity updates.</summary>
-        public EventCallback BeforeUpdate = null;
+        public EventCallback BeforeUpdate;
 
         /// <summary>Callback to execute every frame after this entity updates.</summary>
-        public EventCallback AfterUpdate = null;
+        public EventCallback AfterUpdate;
 
         /// <summary>Callback to execute every time the visibility of this entity changes (also invokes when parent becomes invisible / visible again).</summary>
         public EventCallback OnVisiblityChange = null;
@@ -292,7 +292,7 @@ namespace GeonBit.UI.Entities
         public string ToolTipText;
 
         /// <summary>Is mouse currently pointing on this entity.</summary>
-        protected bool _isMouseOver = false;
+        protected bool _isMouseOver;
 
         /// <summary>If true, this entity and its children will be drawn in greyscale effect and will not respond to events.</summary>
         public bool Disabled = false;
@@ -304,13 +304,13 @@ namespace GeonBit.UI.Entities
         private bool _visible = true;
 
         /// <summary>Is this entity currently disabled?</summary>
-        private bool _isCurrentlyDisabled = false;
+        private bool _isCurrentlyDisabled;
 
         /// <summary>Current entity state.</summary>
         protected EntityState _entityState = EntityState.Default;
 
         // is this entity currently focused?
-        bool _isFocused = false;
+        bool _isFocused;
 
         /// <summary>Does this entity or one of its children currently focused?</summary>
         public bool IsFocused
@@ -350,16 +350,16 @@ namespace GeonBit.UI.Entities
         }
 
         // is this entity draggable?
-        private bool _draggable = false;
+        private bool _draggable;
 
         // do we need to init drag offset from current position?
-        private bool _needToSetDragOffset = false;
+        private bool _needToSetDragOffset;
 
         // current dragging offset.
         private Vector2 _dragOffset = Vector2.Zero;
 
         // true if this entity is currently being dragged.
-        private bool _isBeingDragged = false;
+        private bool _isBeingDragged;
 
         /// <summary>Default size this entity will have when no size is provided or when -1 is set for either width or height.</summary>
         public static Vector2 DefaultSize = Vector2.Zero;
@@ -668,8 +668,8 @@ namespace GeonBit.UI.Entities
         /// </summary>
         public Vector2 SpaceAfter
         {
-            set { SetStyleProperty(StylePropertyIds.SpaceAfter, new StyleProperty(value)); }
-            get { return GetActiveStyle(StylePropertyIds.SpaceAfter).asVector; }
+            set => SetStyleProperty(StylePropertyIds.SpaceAfter, new StyleProperty(value));
+            get => GetActiveStyle(StylePropertyIds.SpaceAfter).asVector;
         }
 
         /// <summary>
@@ -1185,7 +1185,7 @@ namespace GeonBit.UI.Entities
         /// Called every frame before drawing is done.
         /// </summary>
         /// <param name="spriteBatch">SpriteBatch to draw on.</param>
-        virtual protected void OnBeforeDraw(SpriteBatch spriteBatch)
+        virtual protected void     OnBeforeDraw(SpriteBatch spriteBatch)
         {
             BeforeDraw?.Invoke(this);
             UserInterface.Active.BeforeDraw?.Invoke(this);

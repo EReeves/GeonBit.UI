@@ -21,7 +21,7 @@ namespace GeonBit.UI
         private Stack<RenderTarget2D> _renderTargets = new Stack<RenderTarget2D>();
 
         // last used render target
-        RenderTarget2D _lastRenderTarget = null;
+        RenderTarget2D _lastRenderTarget;
 
         /// <summary>
         /// Add a render target to the render targets stack.

@@ -14,7 +14,7 @@
 // Since: 2016.
 //-----------------------------------------------------------------------------
 #endregion
-using System.Collections.Generic;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GeonBit.UI.DataTypes;
@@ -84,7 +84,7 @@ namespace GeonBit.UI.Entities
         private PanelOverflowBehavior _overflowMode = PanelOverflowBehavior.Overflow;
 
         // panel scrollbar
-        VerticalScrollbar _scrollbar = null;
+        VerticalScrollbar _scrollbar;
 
         /// <summary>
         /// Get the scrollbar of this panel.
@@ -105,7 +105,7 @@ namespace GeonBit.UI.Entities
         }
 
         /// <summary>If panel got scrollbars, use this render target to scroll.</summary>
-        protected RenderTarget2D _renderTarget = null;
+        protected RenderTarget2D _renderTarget;
 
         /// <summary>
         /// Get overflow scrollbar value.
@@ -333,7 +333,8 @@ namespace GeonBit.UI.Entities
                 Vector2 frameSize = new Vector2(data.FrameWidth, data.FrameHeight);
 
                 // draw panel
-                UserInterface.Active.DrawUtils.DrawSurface(spriteBatch, texture, _destRect, frameSize, 1f, FillColor, Scale);
+                UserInterface.Active.DrawUtils.DrawSurface(spriteBatch, texture, _destRect, frameSize, 1f, FillColor,
+                    Scale);
             }
 
             // call base draw function
